@@ -1,6 +1,5 @@
-# Kaggle Playgrounds
+# Playground
 This repo contains Jupyter Notebooks I create to play around with various Kaggle's datasets of interest with the goal to learn new Machine Learning and Deep Learning frameworks/techniques.
+I recently started adding new non-Kaggle-related-exclusive content, sharing some notebooks with various Deep Learning experiments especially around the fastai library.
 
-As of now it contains:
-
-1. [New York City Taxi Fare Prediction](https://www.kaggle.com/c/new-york-city-taxi-fare-prediction): pytorch, regression
+Check out my (ML blog)[https://francescopochetti.com/] for posts about each one of those kernels.
