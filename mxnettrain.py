@@ -90,7 +90,7 @@ def train(channel_input_dirs, hyperparameters):
     
     
     # Prepare the data
-    data_dir = channel_input_dirs
+    data_dir = channel_input_dirs['training']
     training_dataset = mx.gluon.data.vision.ImageRecordDataset(data_dir + '/train.rec', transform=train_aug_transform)
     validation_dataset = mx.gluon.data.vision.ImageRecordDataset(data_dir + '/valid.rec', transform=valid_aug_transform)
     
@@ -112,6 +112,32 @@ def train(channel_input_dirs, hyperparameters):
 
     return train_loop(train_iter, test_iter, net, loss, trainer, ctx, num_epochs)
 
-
 def save(net, model_dir):
     net.save_params('%s/model.params' % model_dir)
+    
+def model_fn(model_dir):
+    net = models.get_model('resnet18_v2', ctx=mx.cpu(), pretrained=False, classes=28)
+    net.load_params('%s/model.params' % model_dir, ctx=mx.cpu())
+    return net
+
+def transform_fn(net, data, input_content_type, output_content_type):
+    data = mx.nd.array(json.loads(data))
+    data = data.astype('float32')/255
+    augs = mx.image.CreateAugmenter(data_shape=(3,64,64),
+                                    mean=mx.nd.array([0.485, 0.456, 0.406]), 
+                                    std=mx.nd.array([0.229, 0.224, 0.225]))
+    for aug in augs:
+        data = aug(data)
+    data = nd.transpose(data, (2,0,1))
+    data = nd.expand_dims(data, axis=0)
+    
+    outputs = sig(net(data))
+    nz = outputs.asnumpy().squeeze().nonzero()[0]
+    classes = np.array(['Action', 'Adult', 'Adventure', 'Animation', 'Biography', 'Comedy',
+       'Crime', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film-Noir',
+       'Game-Show', 'History', 'Horror', 'Music', 'Musical', 'Mystery',
+       'News', 'Reality-TV', 'Romance', 'Sci-Fi', 'Short', 'Sport',
+       'Talk-Show', 'Thriller', 'War', 'Western'], dtype=object)
+    
+    response = json.dumps(classes[nz].tolist())
+    return response, output_content_type
