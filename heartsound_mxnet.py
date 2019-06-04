@@ -29,7 +29,10 @@ def train(current_host, hosts, num_cpus, num_gpus, channel_input_dirs, model_dir
         kvstore = 'dist_device_sync'
 
     ctx = [mx.gpu(i) for i in range(num_gpus)] if num_gpus > 0 else [mx.cpu()]
-    net = models.get_model('vgg16_bn', ctx=ctx, pretrained=True, classes=2)
+    net = models.get_model('vgg16_bn', ctx=ctx, pretrained=False, classes=2)
+    pretrained_net = models.get_model('vgg16_bn', ctx=ctx, pretrained=True)
+    
+    net.features = pretrained_net.features
     batch_size *= max(1, len(ctx))
 
     part_index = 0
@@ -44,13 +47,14 @@ def train(current_host, hosts, num_cpus, num_gpus, channel_input_dirs, model_dir
     test_data = get_test_data(num_cpus, data_dir, batch_size)
 
     # Collect all parameters from net and its children, then initialize them.
-    net.initialize(mx.init.Xavier(magnitude=2), ctx=ctx)
+    net.initialize(mx.init.Xavier(magnitude=2), ctx=ctx, force_reinit=True)
     # Trainer is for updating parameters with gradient.
     trainer = gluon.Trainer(net.collect_params(), 'sgd',
                             optimizer_params={'learning_rate': learning_rate, 'momentum': momentum, 'wd': wd},
                             kvstore=kvstore)
     metric = mx.metric.Accuracy()
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
+    net.hybridize()
 
     best_accuracy = 0.0
     for epoch in range(epochs):
@@ -93,7 +97,7 @@ def train(current_host, hosts, num_cpus, num_gpus, channel_input_dirs, model_dir
         # only save params on primary host
         if current_host == hosts[0]:
             if val_acc > best_accuracy:
-                net.save_params('{}/model-{:0>4}.params'.format(model_dir, epoch))
+                net.export('{}/model-{:0>4}'.format(model_dir, epoch))
                 best_accuracy = val_acc
 
     return net
@@ -122,7 +126,7 @@ def get_data(path, augment, num_cpus, batch_size, num_parts=1, part_index=0):
 
 
 def get_test_data(num_cpus, data_dir, batch_size):
-    return get_data(os.path.join(data_dir, "valid.rec"), False, num_cpus, batch_size, data_shape, resize, 1, 0)
+    return get_data(os.path.join(data_dir, "valid.rec"), False, num_cpus, batch_size, 1, 0)
 
 
 def get_train_data(num_cpus, data_dir, batch_size, num_parts=1, part_index=0):
