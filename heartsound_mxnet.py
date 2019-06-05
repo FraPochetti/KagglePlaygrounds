@@ -16,45 +16,55 @@ from mxnet.gluon.model_zoo import vision as models
 
 def train(current_host, hosts, num_cpus, num_gpus, channel_input_dirs, model_dir, hyperparameters, **kwargs):
     # retrieve the hyperparameters we set in notebook (with some defaults)
-    batch_size = hyperparameters.get('batch_size', 32)
-    epochs = hyperparameters.get('epochs', 100)
+    batch_size = hyperparameters.get('batch_size', 16)
+    epochs = hyperparameters.get('epochs', 5)
     learning_rate = hyperparameters.get('learning_rate', 0.01)
     momentum = hyperparameters.get('momentum', 0.9)
     log_interval = hyperparameters.get('log_interval', 1)
     wd = hyperparameters.get('wd', 0.0001)
+    arch = hyperparameters.get('arch', 'resnet34_v1')
+    freeze = hyperparameters.get('freeze', False)
+    opt = hyperparameters.get('optimizer', 'sgd')
 
     if len(hosts) == 1:
         kvstore = 'device' if num_gpus > 0 else 'local'
     else:
         kvstore = 'dist_device_sync'
-
-    ctx = [mx.gpu(i) for i in range(num_gpus)] if num_gpus > 0 else [mx.cpu()]
-    net = models.get_model('vgg16_bn', ctx=ctx, pretrained=False, classes=2)
-    pretrained_net = models.get_model('vgg16_bn', ctx=ctx, pretrained=True)
-    
-    net.features = pretrained_net.features
-    batch_size *= max(1, len(ctx))
-
+        
     part_index = 0
     for i, host in enumerate(hosts):
         if host == current_host:
             part_index = i
             break
 
-
+    ctx = [mx.gpu(i) for i in range(num_gpus)] if num_gpus > 0 else [mx.cpu()]
+    batch_size *= max(1, len(ctx))
+    
+    # Getting the model
+    net = get_net(arch, ctx)
+            
+    # Getting the data
     data_dir = channel_input_dirs['training']
     train_data = get_train_data(num_cpus, data_dir, batch_size, num_parts=len(hosts), part_index=part_index)
     test_data = get_test_data(num_cpus, data_dir, batch_size)
 
-    # Collect all parameters from net and its children, then initialize them.
-    net.initialize(mx.init.Xavier(magnitude=2), ctx=ctx, force_reinit=True)
-    # Trainer is for updating parameters with gradient.
-    trainer = gluon.Trainer(net.collect_params(), 'sgd',
-                            optimizer_params={'learning_rate': learning_rate, 'momentum': momentum, 'wd': wd},
+    # Setting up the trainer
+    if freeze:
+        params = net.output.collect_params()
+    else:
+        net.output.collect_params().setattr('lr_mult', 10)
+        params = net.collect_params()
+    
+    if opt == 'sgd':
+        optimizer_params={'learning_rate': learning_rate, 'momentum': momentum, 'wd': wd}
+    else:
+        optimizer_params={'learning_rate': learning_rate, 'wd': wd}
+    
+    trainer = gluon.Trainer(params, opt,
+                            optimizer_params=optimizer_params,
                             kvstore=kvstore)
     metric = mx.metric.Accuracy()
     loss = gluon.loss.SoftmaxCrossEntropyLoss()
-    net.hybridize()
 
     best_accuracy = 0.0
     for epoch in range(epochs):
@@ -111,10 +121,19 @@ def save(net, model_dir):
         os.rename(os.path.join(model_dir, best), os.path.join(model_dir, 'model.params'))
 
         
+def get_net(arch, ctx):
+    net = models.get_model(arch, ctx=ctx, pretrained=False, classes=2)
+    pretrained_net = models.get_model(arch, ctx=ctx, pretrained=True) 
+    net.features = pretrained_net.features
+    net.output.initialize(mx.init.Xavier(), ctx=ctx)
+    net.hybridize()
+    return net
+        
+    
 def get_data(path, augment, num_cpus, batch_size, num_parts=1, part_index=0):
     return mx.io.ImageRecordIter(
         path_imgrec=path,
-        data_shape=(3, 224, 224),
+        data_shape=(3, 360, 360),
         batch_size=batch_size,
         rand_crop=augment,
         scale=1./255,
