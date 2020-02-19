@@ -59,11 +59,14 @@ def get_shap_feat_importance(shap_values, X, features=None, cats=None):
 
 def sigmoid(x): return 1/(1+np.exp(-x))
 
-def show_shap(expected_value, shap_values, X, id=None, matplotlib=True, cats=None, x=None, y=None, disp=None, link='identity', feats=None):
+def show_shap(expected_value, shap_values, X, id=None, matplotlib=True, cats=None, x=None, y=None, disp=None, link='identity', feats=None, clf=None):
     if x is not None: return shap.dependence_plot(x, shap_values, X, display_features=disp, interaction_index=y)
     if id==None: return shap.force_plot(expected_value, shap_values, X)
     
     print('Printing top/bottom 5 features by SHAP values')
+    if clf is not None: 
+        try: print(f'Predicted probability of event: {clf.predict_proba(X.loc[id].values).squeeze()[1]}')
+        except: print(f'Predicted probability of event: {clf.predict_proba(X.loc[id]).squeeze()[1]}')
     s = pd.DataFrame(shap_values, index=X.index, columns=feats)
     s1 = X.loc[id].to_frame('Feat value')
     s2 = s.loc[id].to_frame('SHAP value').join(s1)
