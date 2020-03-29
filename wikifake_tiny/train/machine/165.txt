@@ -1,0 +1,53 @@
+ Wins , T 
+ = Ties , L = 
+ Songs, S = Songs
+
+]
+
+is.pickn( ', ', 1 ) is.na (m, 1 )
+
+is.none(('km ','kmz ', 1 ) is.na (str, 2 )
+
+is.none(('The total score is %s, %d- %s, %s, %d- %s ',
+
+' m ','mz ', 1, 1,'sts ','sts ', 1,'pts ','pts ', 2 ) is.na (a.completelist, 1 )
+
+is.none(('~ ','~z ', 1 ) is.na (c, 2 )
+
+is.none(('~1 ','~2 ', 1 ) is.na (d, 2 )
+
+is.none(('%x ','%y ', 1 ) is.na (b, 2 )
+
+is.none(('* ','*0 ', 1 ) is.na (b2, 1 )
+
+is.none(('* ','*1 ', 1 ) is.na (c2, 2 )
+
+is.none(('* ','*2 ', 1 ) is.na (b3, 2 )
+
+is.none(('* ','*3 ', 1 ) is.na (b4, 2 )
+
+is.none(('* ','*4 ', 1 ) is.na (c4, 2 )
+
+is.none(('* ','*5 ', 1 ) is.na (c5, 2 )
+
+is.none(('* ','*6 ', 1 ) is.na (c6, 2 )
+
+is.none(('* ','*7 ', 1 ) is.na (c7, 2 )
+
+is.none(('* ','*8 ', 1 ) is.na (c8, 2 )
+
+is.none(('% ','%x ', 1 ) is.na (b3, 1 ) is.na (b4, 1 ) is.na (c3, 1 )
+
+is.none(('% ','%y ', 1 ) is.na (b3, 2 ) is.na (b4, 2 ) is.na (c3, 2 ) is.na (b5, 2 )
+
+is.none(('* ','*0 ', 1 ) is.na (b2, 1 ) is.na (c2, 1 ) is.na (b3, 2 ) is.na (c2, 2 ) is.na (b4, 2 )
+
+is.none(('* ','*1 ', 1 ) is.na (b4, 1 ) is.na (c4, 1 ) is.na (b5, 1 ) is.na (c4, 2 ) is.na (b6, 1 )
+
+is.none(('* ','*2 ', 1 ) is.na (c5, 1 ) is.na (b7, 1 ) is.na (b8, 1 ) is.na (c5, 2 ) is.na (b9, 1 )
+
+is.none(('* ','*3 ', 1 ) is.na (b9, 1 ) is.na (c9, 1 ) is.na (b10, 1 ) is.na (c9, 2 ) is.na (b11, 1 )
+
+is.none(('* ','*4 ', 1 ) is.na (c12, 1 ) is.na (b13, 1 ) is.na (c12, 2 ) is.na (b14, 1 ) is.na (c12, 2 ) is.na (b15, 1 )
+
+is.none(('* ','*5 ', 1 ) is.na (c16, 1 ) is.na (b17, 1 ) is.

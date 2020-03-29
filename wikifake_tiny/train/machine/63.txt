@@ -1,0 +1,6 @@
+ 
+ = Fastra II = 
+ 
+ The Fastra II is a desktop supercomputer designed for <unk> . It was built in late 2009 by the ASTRA ( All Scale <unk> Reconstruction Antwerp ) group of researchers of the <unk> ( <unk> institute for <unk> Technology ) <unk> at the University of Antwerp and by Belgian computer shop Tones , in collaboration with Asus , a Taiwanese multinational computer product manufacturer , as the successor to the Fastra I ( built in 2008 ) .
+The Fastra II is currently working on its next generation.
+I have written at least two more posts about the Fastra II: In Goettingen-Sellershof's "A Weblogic View of the Fastra II" (March 2014), and in Guillaume V. S. Mandini's "Fastra II at 6-e lukewarm" (November 2013). There are almost 50 detailed reviews of the Fastra II, including almost all the blog posts about its technologies.

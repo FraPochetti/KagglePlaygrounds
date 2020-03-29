@@ -1,0 +1,10 @@
+ 
+ = The Secret of Monkey Island = 
+ 
+ The Secret of Monkey Island is a 1990 point @-@ and @-@ click graphic adventure game developed and published by Lucasfilm Games . It takes place in a fantastic version of the Caribbean during the age of piracy . The player assumes the role of Guybrush Threepwood , a young man who dreams of becoming a pirate and explores fictional islands while solving puzzles . 
+ The game was conceived in 1988 by Lucasfilm employee Ron Gilbert , who designed it with Tim Schafer and Dave Grossman . Gilbert 's <unk> with contemporary adventure titles led him to make the player character 's death almost impossible , which meant that gameplay focused the game on exploration . The atmosphere was based on that of the Pirates of the Caribbean theme park ride . The Secret of Monkey Island was the fifth game built with the SCUMM engine , which was heavily modified to include a more user @-@ friendly interface . 
+ Critics praised The Secret of Monkey Island for its humor , audiovisuals , and gameplay . The game spawned a number of sequels , collectively known as the Monkey Island series . Gilbert , Schafer and Grossman also led the development of the sequel Monkey Island 2 : LeChuck 's Revenge . LucasArts released a remake of the original in 2009 , which was also well received by the gaming press . 
+ 
+ = = Gameplay = = 
+ 
+ The Secret of Monkey Island is a 2D adventure game played from a third @-@ person perspective . Via a point @-@ and @-@ click interface , the player guides protagonist Guybrush Threepwood through the game 's world and interacts with the environment by selecting from twelve verb commands ( nine in newer versions ) such as " talk to " for communicating with characters and " pick up " for collecting items between commands and the world 's objects in order to successfully solve puzzles and thus progress in the game . While conversing with other characters , the player may choose between topics for discussion that are listed in a dialog tree ; the game is one of the first to incorporate such a system . The in @-@ game action is frequently interrupted by cutscenes .

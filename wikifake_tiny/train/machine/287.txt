@@ -1,0 +1,26 @@
+ 
+ = Sentence spacing = 
+ 
+ Sentence spacing is the horizontal space between sentences in typeset text . It is a matter of typographical convention . Since the introduction of movable @-@ type printing in Europe , various sentence spacing conventions have been used in languages with a Latin alphabet . These include a normal word space ( as between the words in a sentence ) , a single enlarged space , and two full spaces .
+For example, after putting in a name followed by a date in the pattern C1224: •=••=- •&= *= +=
+This extra wordspace on the right means that the numbers 12 and 24 are found on the next line, whereas the second number ( - ) is on the next line.
+Examples:
+• += x 4 + 10 •=••=- •&= *= += 6 •=••=- •&= *= += 12 •=••=- •&= *= += 6 •=••=- •&= *= += 4 •=••=- •&= *= += 4 •=••=- •&= *= += 12 •=••=- •&= *= += 12 •=••=- •&= *= += 6 •=••=- •&= *= += 8 •=••=- •&= *= += 4 •=••=- •&= *= += 12 •=••=- •&= *= += 6 •=••=- •&= *= += 4 •=••=- •&= *= += 12 •=••=- •&= *= += 4 •=••=- •&= *= += 12 •=••=-
+In that example, the full spacing between the name and the date and between the name and the day is more similar to Japanese than with European languages.
+• - ( in )•= •- •- •- •-
+When putting in an unlimited amount of space, the word space that surrounds the statement can be shifted forward or backward. For example, putting in -2 blocks the full spacing between the given statement and all the preceding statements.
+For example:
+• -•= •- •- •- •- •-
+The "∧") system for spaces
+Since few English grammar rules apply to text of English, the character "∧" does not exist. For the Western languages, it is simply printed at the end of every line. This is the only common currency that has no actual words on it. As a result, the degree to which English is dependent on "∧" is minimal. Examples:
+• ""•[•]:•::∧•
+Adding space
+Due to the function of the internal code ( §3.1.4 ) to support newlines, it is necessary to add a space after the last line in a type-set-up, even if the text is of two different characters. The effect of the space on each line of the output is the same. However, for typeset text with 50 spaces, the space at the end of each line is introduced into the final result to prevent the space from destroying the alignment of a type. An illustration:
+[7099] The following line (759999) is placed in the row '9' of the "19 character fixed-width display set " : [7] × 14 = 67500 0.38 × 1.35 → [8] × 10 = 20000 0.63 × 1.35 → [9] × 10 = 40000 0.82 × 1.35 → [10] × 10 = 21600 0.83 × 1.35
+Since the space between the first & the last
+column #, starting at 2:1, with 4 spaces, produces a margin that borders the words, the following
+column #, starting at 2:1, with 4 spaces, produces a margin that borders the words, the following column # is shifted forward from 2:1 by 4 spaces. This fixed-width display sets the margin to begin at the first "½" character, so
+• [6] × 10 = 6 0.90 × 1.35
+- = 1.2 × 1.2 = 1.2
+This column is aligned on the 5th row and cannot go on the left (i.e. could be placed on the right) since the leftmost "½" character is at the bottom. (That character will be deleted when the final paragraph is published.) Note that all the other columns from the top-right-corner are normally on the right.
+- = 1.2 × 1.2 = 1.

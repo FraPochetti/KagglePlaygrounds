@@ -1,0 +1,5 @@
+ 
+ = Fastra II = 
+ 
+ The Fastra II is a desktop supercomputer designed for <unk> . It was built in late 2009 by the ASTRA ( All Scale <unk> Reconstruction Antwerp ) group of researchers of the <unk> ( <unk> institute for <unk> Technology ) <unk> at the University of Antwerp and by Belgian computer shop Tones , in collaboration with Asus , a Taiwanese multinational computer product manufacturer , as the successor to the Fastra I ( built in 2008 ) . 
+ The Fastra II was determined to be over three times faster than the Fastra I , which in turn was slightly faster than a 512 @-@ core cluster . However , because of the number of GPUs in the computer , the system initially suffered from several issues , like the system refusing to reboot and <unk> due to a lack of space between the video cards .

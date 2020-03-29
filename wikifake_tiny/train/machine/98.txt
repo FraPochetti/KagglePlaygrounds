@@ -1,0 +1,39 @@
+ Note : <unk> 
+ = Games Played ; <unk> = 
+ Games Won ;
+
+Style Selector (defaults to L).
+
+Blink
+
+Default: /blink
+
+Dimension To blink.
+
+The blink will be on if the ground is not touching the screen.
+
+Disable
+
+Default: 0,
+
+This adds a red marker below the active player's cursor. It shows the player's experience point level and an amount of experience in the selected game.
+
+Nub (Placement)
+
+Default: /nub (same as the above above)
+
+Directly above the active player. Doesn't move the cursor (requires anchor).
+
+Cursor
+
+Default: /cursor (use same as above)
+
+Directly above the player. Doesn't move the cursor (requires anchor).
+
+<ink>'s last character - should match what you typed before the click.
+
+'s last character - should match what you typed before the click. <ink>'s last two characters - don't match anything previously typed.
+
+'s last two characters - don't match anything previously typed. Nub <ink> nub nub nub nub.
+
+This is a solution to [2]. While you can probably have multiple nubs at once, they should be in no way overlapping (e.g. <ink> 0 should not overlap <ink> 1). You can add more nubs for even more point variety.

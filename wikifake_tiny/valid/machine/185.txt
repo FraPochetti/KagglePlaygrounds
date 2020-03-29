@@ -1,0 +1,19 @@
+ 
+ = Lisa the Simpson = 
+ 
+ " Lisa the Simpson " is the seventeenth episode of The Simpsons 's ninth season . It originally aired on the Fox network in the United States on March 8 , 1998 . In the episode , Lisa fears that she may be genetically <unk> to lose her intelligence after <unk> tells her of a family gene that can permanently take away intelligence . 
+ " Lisa the Simpson " was written by Ned Goldreyer and directed by Susie <unk> . Her story was made into an episode of the television series Family Guy.
+In "The Simpsons Gallery" of the online exhibition of the Simpson brand in 2013, it is stated by one of the show's designers Ian Herrmann that, "The show has become for many of its devoted fans, more than just a cartoon. "
+" { "episode" : "Lisa the Simpson", "title" : "Lisa the Simpson", "user" : "nadgoldreyer", "comedy" : 0 }
+2. "Lisa's Choice" (2003)
+{ "book" : "Lisa's Choice", "author" : "F. Scott Fitzgerald", "content" : { "likes" : 0, "has_likes" : 0, "total_likes" : 0, "total_votes" : 0, "total_views" : 0, "filter" : { "kind" : "page", "page_type" : "comment", "post_type" : "request", "user" : "nodgoldreyer", "to" : "nadgoldreyer" } } }
+3. "The Gang Gets a New Girl" (2003)
+{ "author" : "Jane Austen", "content" : { "likes" : 0, "has_likes" : 0, "total_likes" : 0, "total_votes" : 0, "total_views" : 0, "filter" : { "kind" : "page", "page_type" : "comment", "post_type" : "request", "user" : "nadgoldreyer", "to" : "nadgoldreyer" } } }
+4. "A Fish Called Selma" (2002)
+{ "author" : "Italo Calvino", "content" : { "likes" : 0, "has_likes" : 0, "total_likes" : 0, "total_votes" : 0, "total_views" : 0, "filter" : { "kind" : "page", "page_type" : "comment", "post_type" : "request", "user" : "nadgoldreyer", "to" : "nadgoldreyer" } } }
+5. "Jihad" (2001)
+{ "author" : "Yad Vashem", "content" : { "likes" : 0, "has_likes" : 0, "total_likes" : 0, "total_votes" : 0, "total_views" : 0, "filter" : { "kind" : "page", "page_type" : "comment", "post_type" : "request", "user" : "nadgoldreyer", "to" : "nadgoldreyer" } } }
+6. "Notorious B.I.G." (2001)
+{ "author" : "Willis Earl Talbot", "content" : { "likes" : 0, "has_likes" : 0, "total_likes" : 0, "total_votes" : 0, "total_views" : 0, "filter" : { "kind" : "page", "page_type" : "comment", "post_type" : "request", "user" : "nadgoldreyer", "to" : "nadgoldreyer" } } }
+7. "Family Feud" (1998)
+{ "author" : "Pratibha N.

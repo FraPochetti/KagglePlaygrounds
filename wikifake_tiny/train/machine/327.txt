@@ -1,0 +1,271 @@
+ Wins , L 
+ = Losses , D = 
+ Draws, U = Upsets, X = Matches
+
+, 1 = Matches, 2 = Matches, 3 = Matches
+
+);
+
+final Format winList =
+
+new Format ( " 24.5*12= "
+
++ "([,][,][,][,])"
+
+);
+
+final Format loseList =
+
+new Format ( " 24.5*12= "
+
++ "([,][,][,][,])"
+
+);
+
+finals
+
+. setFormat (winList);
+
+finals. setFormat (loseList);
+
+golg
+
+. setRoundSize ( 40 );
+
+golg. setRoundCount ( 1 );
+
+golg. setMaxRound ( 30 );
+
+golg. setMaxWinPerRound ( 1 );
+
+golg. setClanCount ( 3 );
+
+golg. setOverflow ( 0 );
+
+rounds
+
+. setFormat (rounds);
+
+rounds. setFormat (rounds. trim ());
+
+rounds. setFormat (rounds. trim ());
+
+// Round:
+
+std. printf ( " Opening Round 1: " );
+
+std. printf ( " C:
+
+" );
+
+std. printf ( "
+
+
+{:# ^(^) : #,
+
+" );
+
+std. printf ( " Rounds: 1-5
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " L:
+
+" );
+
+std. printf ( " P:
+
+" );
+
+std. printf ( " P2:
+
+" );
+
+std. printf ( " S:
+
+" );
+
+std. printf ( " T:
+
+" );
+
+std. printf ( " R:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " A:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " B:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+" );
+
+std. printf ( "
+
+" );
+
+std. printf ( "
+
+
+" );
+
+// Rounds
+
+for ( int i = 0 ; i < roundCount; i ++)
+
+std. printf ( " " );
+
+std. printf ( " The (B)(P(A))(S) came to a 1-1 draw.
+
+" );
+
+// Round:
+
+std. printf ( " The game was tied 1-1.
+
+" );
+
+std. printf ( "
+
+" );
+
+std. printf ( " Opening Round 2:
+
+" );
+
+std. printf ( " C:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " Rounds: 2-3
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " L:
+
+" );
+
+std. printf ( " P:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " S:
+
+" );
+
+std. printf ( " T:
+
+" );
+
+std. printf ( " R:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " A:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( " B:
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std. printf ( "
+
+
+" );
+
+std.

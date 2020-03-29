@@ -1,0 +1,11 @@
+ Key : Pld 
+ = Played , W = 
+ Won, T = Drawn, H = Game finished
+
+Result
+
+A1 = Won, A2 = Lost, B1 = Draw, B2 = Won, C1 = Lost, C2 = Draw, D1 = Won, D2 = Lost, E1 = Won, E2 = Lost, F1 = Lost, F2 = Lost, G1 = Won, G2 = Lost, H1 = Won, H2 = Lost, I1 = Won, I2 = Lost, J1 = Won, J2 = Lost, K1 = Won, K2 = Lost, L1 = Won, L2 = Lost, M1 = Won, M2 = Lost, N1 = Won, N2 = Lost, O1 = Won, O2 = Lost, P1 = Won, P2 = Lost, Q1 = Won, Q2 = Lost, R1 = Won, R2 = Lost, S1 = Won, S2 = Lost, T1 = Won, T2 = Won, U1 = Won, U2 = Lost, V1 = Won, V2 = Lost, W1 = Won, W2 = Lost, X1 = Won, X2 = Lost, Y1 = Won, Y2 = Lost, Z1 = Won, Z2 = Lost
+
+Scoring
+
+Category Points Att. Int. Mins. Need.
