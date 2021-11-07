@@ -184,6 +184,8 @@ class MilestonesFinetuning(BaseFinetuning):
     def finetune_function(self, pl_module: pl.LightningModule, epoch: int, optimizer: Optimizer, opt_idx: int):
         opt_pgs = optimizer.param_groups
         pl_module.log("lr head param group", opt_pgs[0]["lr"])
+        if len(opt_pgs) > 1:
+            pl_module.log("lr backbone param group", opt_pgs[1]["lr"])
         pl_module.log("# param groups", len(opt_pgs))
 
         if epoch == self.milestone:
