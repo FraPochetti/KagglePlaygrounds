@@ -3,7 +3,7 @@ sys.path.insert(1, '/home/ubuntu/KagglePlaygrounds/deepfake/code')
 
 from utils import *
 
-config = {"lr": 0.001,
+config = {"lr": 0.0001,
           "batch_size": 16,
           "num_workers": 8,
           "milestone": 5,

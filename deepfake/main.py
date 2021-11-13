@@ -1,24 +1,29 @@
-import json
-import boto3
-import sagemaker
-from sagemaker.pytorch import PyTorch
+import argparse
 from sagemaker.estimator import Estimator
 
 bucket = 's3://deepfake-fra/'
+role = "IAM role with full SM and S3 permissions"
 
-role = "myrole"
+if __name__ =='__main__':
 
-estimator = Estimator(
-    role=role,
-    image_uri="myimage",
-    instance_count=1,
-    instance_type="ml.p3.2xlarge",
-    hyperparameters={
-        'epochs': 10,
-        'lr': 0.1,
-    },
-    environment={"WANDB_API_KEY": "mykey"},)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--local', action='store_true')
+    args = parser.parse_args()
 
-estimator.fit({
-    'train': bucket,
-})
+    estimator = Estimator(
+        role=role,
+        image_uri="ECR image uri" if not args.local else "pv",
+        instance_count=1,
+        instance_type="ml.p3.2xlarge" if not args.local else "local_gpu",
+        hyperparameters={
+            'epochs': 6,
+            'lr': 0.001,
+            'backbone': 'x3d_xs',
+            'batch-size': 16,
+            'milestone': 3,
+        },
+        environment={"WANDB_API_KEY": "my api key"},)
+
+    estimator.fit({
+        'train': bucket if not args.local else 'file:///home/ubuntu/data/faces_s3',
+    })

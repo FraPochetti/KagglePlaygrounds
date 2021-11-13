@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-chmod +x code/train
+chmod +x code/train.py
 
 aws ecr describe-repositories --repository-names "custom-images" > /dev/null 2>&1
 
