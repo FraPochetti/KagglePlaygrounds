@@ -1,3 +1,8 @@
+def warn(*args, **kwargs):
+    pass
+import warnings
+warnings.warn = warn
+
 import pandas as pd
 import random
 import os
@@ -41,6 +46,153 @@ import lime.lime_tabular
 
 from catboost import Pool, CatBoostClassifier, CatBoostRegressor
 import shap
+
+#######################################################################
+
+def percentile(n):
+    def percentile_(x):
+        return np.percentile(x, n)
+    percentile_.__name__ = 'percentile_%s' % n
+    return percentile_
+
+def train_model(X_train, y_train, X_valid, y_valid, m=xgb.XGBClassifier(learning_rate=0.03, n_estimators=300, n_jobs=-1, verbosity = 0)):
+    m.fit(X_train, y_train)
+    probs_valid = m.predict_proba(X_valid)[:,1]
+    return roc_auc_score(y_valid, probs_valid)
+
+def estimate_valid_size_df(X, y, grid=np.arange(0.1, 1.1, 0.1), reps=range(30), verbose=False):
+    valid_aucs = []
+
+    X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.3, random_state=123)
+    if verbose: print(f"Training on fixed {len(X_train)} points (70% total). Max validation size (30% total): {len(X_valid)}")
+
+    m=xgb.XGBClassifier(learning_rate=0.03, n_estimators=300, n_jobs=-1, verbosity = 0)
+    m.fit(X_train, y_train)
+    probs_valid = m.predict_proba(X_valid)[:,1]
+    valid = pd.DataFrame({'actual': y_valid, 'pred': probs_valid})
+
+    for perc in grid:
+        n = int(len(X_valid)*perc)
+        if perc==1.0:
+            auc = roc_auc_score(y_valid, probs_valid)
+            valid_aucs.append((perc, n, auc, len(X_valid), len(X_train), 1))
+
+        if perc<1.0:
+            for _ in reps:
+                val = valid.sample(n, replace=True)
+                auc = roc_auc_score(val.actual, val.pred)
+                valid_aucs.append((perc, n, auc, len(val), len(X_train), len(reps)))
+    
+    df = pd.DataFrame(valid_aucs, columns=['Percentage', 'Sample', 'AUC', 'Valid_size', 'Train_size', 'Bootstraps'])
+    return df
+
+def estimate_train_size_df(X, y, grid=np.arange(0.1, 1.1, 0.1), reps=range(30), verbose=False):
+    since = time.time()
+    train_aucs = []
+
+    X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.2, random_state=123)
+    if verbose: print(f"Validating on fixed {len(X_valid)} points (20% total). Max training size (80% total): {len(X_train)}")
+
+    for perc in grid:
+        n = int(len(X_train)*perc)
+        if perc==1.0:
+            auc = train_model(X_train, y_train, X_valid, y_valid)
+            train_aucs.append((perc, n, auc, len(X_valid), len(X_train), 1))
+            if verbose: print(f"Training once on {n} data points: {perc*100}% of {len(X_train)}...")
+        
+        if perc<1.0:
+            if verbose: print(f"Training {len(reps)} times on {n} data points: {np.round(perc*100,1)}% of {len(X_train)}...")
+            for _ in reps:
+                X_t = X_train.sample(n)
+                y_t = y_train.loc[X_t.index]
+                auc = train_model(X_t, y_t, X_valid, y_valid)
+                train_aucs.append((perc, n, auc, len(X_valid), len(X_t), len(reps)))
+    time_elapsed = (time.time() - since)
+    df = pd.DataFrame(train_aucs, columns=['Percentage', 'Sample', 'AUC', 'Valid_size', 'Train_size', 'Bootstraps'])
+    print("Done in {:.0f}m {:.0f}s".format(time_elapsed // 60, time_elapsed % 60))
+    return df
+
+def aggregate_size_df(df):
+    df["Perc-Sample"] = (df.Percentage*100).astype(int).astype(str) + "%-" + df.Sample.astype(str)
+    df = df.groupby('Perc-Sample').agg(Sample=('Sample', 'min'),
+                                    Valid_size=('Valid_size','min'),
+                                    Train_size=('Train_size','min'),
+                                    Bootstraps=('Bootstraps', 'min'),
+                                    AUC_mean=('AUC', 'mean'),
+                                    AUC_std=('AUC', 'std'),
+                                    AUC_975=('AUC', percentile(97.5)),
+                                    AUC_025=('AUC', percentile(2.5))
+                                    )
+    df["975VSmean_%"] = (df.AUC_975/df.AUC_mean-1) * 100
+    df["025VSmean_%"] = (df.AUC_025/df.AUC_mean-1) * 100
+    df.sort_values(by='Sample', inplace=True)
+    return df
+
+def plot_size_df(df, title=None, plot_std=False):
+    _, _ = plt.subplots(figsize=(9, 7))
+    plt.plot(df.index, df.AUC_mean, 'k', label="Mean AUC")
+    if plot_std: plt.fill_between(df.index, df.AUC_mean - 2 * df.AUC_std, df.AUC_mean + 2 * df.AUC_std, color='b', alpha=0.2, label="2std (95%) AUC interval")
+    plt.fill_between(df.index, df.AUC_025, df.AUC_975, color='g', alpha=0.2, label="2.5-97.5 (95%) AUC quantiles")
+    plt.ylabel('AUC')
+    plt.xlabel('%dataset - #samples')
+    if title is not None: plt.title(title)
+
+    for x,y in zip(df.index,df.AUC_mean):
+        label = "{:.3f}".format(y)
+        plt.annotate(label, # this is the text
+                    (x,y), # this is the point to label
+                    textcoords="offset points", # how to position the text
+                    xytext=(0,10), # distance from text to points (x,y)
+                    ha='center') # horizontal alignment can be left, right or center
+
+    plt.legend(loc="lower right")
+    plt.xticks(rotation=30)
+    plt.show()
+    display(df.round(3))
+
+def estimate_impact_size(what: str,
+                         X: pd.DataFrame,
+                         y: pd.Series, 
+                         grid: np.array = np.arange(0.1, 1.1, 0.1), 
+                         reps: range = range(30), 
+                         verbose: bool = False) -> (pd.DataFrame, pd.DataFrame):
+    """
+    Estimates the impact of the training set size on a fix-sized validation set.
+
+    Parameters
+    ----------
+    what: str
+        `train` or `test`. Whether to estimate the impact of the size of the 
+        training or test set.
+    
+    X : pd.DataFrame
+        The dataframe containing all our dataset. Ready to be fed to an estimator.
+
+    y: pd.Series
+        The ground truth labels
+
+    grid: np.array (default=np.arange(0.1, 1.1, 0.1))
+        Array of percentages of the validation set to explore.
+
+    reps: range (default=range(30))
+        Number of times the validation process is repeated at each percentage level.
+        Bootstrapping with repetition.
+    
+    verbose: bool (default=False)
+        Whether to print relevant info while running
+    """
+    if what == 'test': original = estimate_valid_size_df(X, y, grid=grid, reps=reps, verbose=verbose)
+    elif what == 'train': original = estimate_train_size_df(X, y, grid=grid, reps=reps, verbose=verbose)
+    else: raise ValueError(f"`what` accepts `test` or `train` only: {what} was provided instead.")
+
+    df = aggregate_size_df(original)
+    if what == 'test': title = f"AUC on validation set of increasing size (up to 30% total - {df.Valid_size.max()} points) \n at fixed training set size (@70% total - {df.Train_size.max()} points)"
+    else: title = f"AUC on validation set (fixed @20% total - {df.Valid_size.min()} points) \n at increasing training set size (up to 80% total - {df.Train_size.max()} points)"
+    
+    plot_size_df(df, title)
+    return df, original
+
+########################################################################
 
 random_state = 10
 
