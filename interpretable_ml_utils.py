@@ -17,7 +17,7 @@ from pathlib import Path
 from pandas.api.types import is_string_dtype, is_numeric_dtype
 import re
 from typing import List
-import pyodbc
+# import pyodbc
 from math import sqrt
 
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler, MaxAbsScaler, KBinsDiscretizer, LabelEncoder
@@ -35,17 +35,17 @@ rcParams.update({'figure.autolayout': True})
 import matplotlib.pyplot as plt
 import matplotlib
 
-from pdpbox import pdp
-import waterfall_chart
+# from pdpbox import pdp
+# import waterfall_chart
 
-import eli5
-from eli5.sklearn import PermutationImportance
+# import eli5
+# from eli5.sklearn import PermutationImportance
 
-import lime
-import lime.lime_tabular
+# import lime
+# import lime.lime_tabular
 
-from catboost import Pool, CatBoostClassifier, CatBoostRegressor
-import shap
+# from catboost import Pool, CatBoostClassifier, CatBoostRegressor
+# import shap
 
 #######################################################################
 
