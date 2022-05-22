@@ -1,6 +1,10 @@
 # Playground
-This repo contains Jupyter Notebooks I create to play around with various Kaggle's datasets of interest with the goal to learn new Machine Learning and Deep Learning frameworks/techniques.
+This repo contains ML/DL projects in the form of standalone notebooks or more complex directories.
 
-I recently started adding new non-Kaggle-related-exclusive content, sharing some notebooks with various Deep Learning experiments especially around the fastai library.
+It started as a way to play around with various Kaggle's datasets (hence the name `KagglePlaygrounds`) with the goal to learn new Machine Learning and Deep Learning frameworks/techniques.
 
-Check out my [ML blog](https://francescopochetti.com/) for posts about each one of those kernels.
+I recently started adding new non-Kaggle-related-exclusive content, sharing work around various Deep Learning experiments especially on AWS.
+
+Check out my [ML blog](https://francescopochetti.com/) for posts about each one of those.
+
+**Note**: a couple of projects might need `git lfs` installed and setup. 
