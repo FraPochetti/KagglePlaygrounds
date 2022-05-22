@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  icetrt:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: trt
+    tty: true
+    volumes:
+      - ../../../../:/root/
