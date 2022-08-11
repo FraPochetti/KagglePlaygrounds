@@ -1,0 +1,7 @@
+path: /home/ubuntu/data/neuralmagic_faces
+train: train/images
+val: valid/images
+test: valid/images
+
+nc: 1
+names: ['face']
