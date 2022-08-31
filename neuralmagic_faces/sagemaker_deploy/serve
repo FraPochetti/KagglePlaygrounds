@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+from typing import Tuple, List
+from deepsparse.pipeline import Pipeline
+import base64
+import numpy as np
+import cv2, logging, json
+
+from flask import Flask
+from flask import Response
+from flask import request
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
+
+app = Flask(__name__)    
+
+def load_pipeline():
+    return Pipeline.create(task="yolo", model_path="/opt/ml/model/best.onnx",)
+
+
+def load_image(req: request) -> np.ndarray:
+    post_body = req.get_data().decode("utf-8")
+    post_body = json.loads(post_body)
+    image = base64.b64decode(post_body['image'])
+    
+    image_np = np.frombuffer(image, np.uint8)
+    img_np = cv2.imdecode(image_np, cv2.IMREAD_COLOR)
+    logging.info(f"Processing image of size {img_np.shape}")
+    return img_np
+    
+
+def process_image(img: np.ndarray) -> np.ndarray:
+    img_resized = cv2.resize(img, (640, 640))
+    return img_resized[:, :, ::-1].transpose(2, 0, 1)
+
+
+def scale_bbox_to_original_img_shape(img: np.ndarray, xyxy: List[float]) -> Tuple[int]:
+    w, h = img.shape[1], img.shape[0]
+    scale_y = h / 640.
+    scale_x = w / 640.
+
+    left = int(xyxy[0] * scale_x)
+    top = int(xyxy[1] * scale_y)
+    right = int(xyxy[2] * scale_x)
+    bottom = int(xyxy[3] * scale_y)
+
+    return left, top, right, bottom
+
+
+@app.route("/invocations", methods=["POST"])
+def predict():
+    pipeline = load_pipeline()
+    img = load_image(request)
+    img_processed = process_image(img)
+    pipeline_outputs = pipeline(images=[img_processed], iou_thres=0.6, conf_thres=0.5)
+    
+    boxes = pipeline_outputs[0].boxes
+    boxes = [scale_bbox_to_original_img_shape(img, box) for box in boxes]
+    scores = pipeline_outputs[0].scores
+
+    outs = {
+        "boxes": boxes,
+        "scores": scores
+    }
+    
+    return Response(response=json.dumps(outs), status=200)
+
+
+@app.route("/ping")
+def ping(): return Response(response="OK", status=200)
+
+
+app.run(host="0.0.0.0", port=8080)
