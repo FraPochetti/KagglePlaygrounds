@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  torch_trt:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: torch_trt
+    tty: true
+    volumes:
+      - ../../../../:/root/

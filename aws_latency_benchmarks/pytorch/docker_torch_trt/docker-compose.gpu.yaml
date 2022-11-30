@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  torch_trt:
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: 1
+            capabilities: [gpu]

@@ -1,0 +1,58 @@
+#!/usr/bin/env python3
+
+import json, io, base64, logging
+import torch
+import torch_tensorrt
+import torchvision.transforms as transforms
+from PIL import Image
+
+from flask import Flask
+from flask import Response
+from flask import request
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+logging.info(f"Running on {device}")
+MODEL = torch.jit.load("/opt/ml/model/trt_model.pth").eval().to(device)
+logging.info(f"Properly loaded model: {MODEL}")
+
+app = Flask(__name__)    
+
+
+def input_fn(request_body):
+    post_body = request_body.get_data().decode("utf-8")
+    post_body = json.loads(post_body)
+    f = base64.b64decode(post_body['image'])
+    f = io.BytesIO(f)
+    input_image = Image.open(f).convert("RGB")
+    preprocess = transforms.Compose(
+        [
+            transforms.Resize(255),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+        ]
+    )
+    input_tensor = preprocess(input_image).unsqueeze(0)
+    return input_tensor.half().to(device)
+
+
+@app.route("/invocations", methods=["POST"])
+def predict():
+    logging.info(f"Running predict...")
+    input_batch = input_fn(request)
+
+    with torch.inference_mode():
+        prediction = MODEL(input_batch)
+
+    res = prediction.cpu().numpy().tolist()
+    return Response(response=json.dumps(res), status=200)
+
+
+@app.route("/ping")
+def ping(): return Response(response="OK", status=200)
+
+
+app.run(host="0.0.0.0", port=8080)

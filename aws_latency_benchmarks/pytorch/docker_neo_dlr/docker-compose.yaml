@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  neo_dlr:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    image: neo_dlr
+    tty: true
+    volumes:
+      - ../../../../:/root/
