@@ -1,0 +1,8 @@
+num_cores: 1
+num_workers: 1
+integration: sagemaker
+endpoints:
+    - task: image_classification
+      route: /invocations
+      model: zoo:cv/classification/resnet_v1-18/pytorch/sparseml/imagenet/pruned85_quant-none-vnni
+      batch_size: 1

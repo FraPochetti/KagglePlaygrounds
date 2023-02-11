@@ -1,0 +1,9 @@
+uvicorn
+fastapi
+python-multipart
+boto3
+sagemaker
+deepsparse==1.3.2
+ipykernel
+rich==12.3.0
+click>=8.0
