@@ -1,3 +1,4 @@
+flask
 uvicorn
 fastapi
 python-multipart

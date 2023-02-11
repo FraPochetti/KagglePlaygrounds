@@ -170,7 +170,7 @@ class SparseMaker:
 
         print("endpoint and SageMaker model deleted")
 
-NAME = "neural-magic"
+NAME = "neural-magic-resnet"
 def construct_sparsemaker():
     return SparseMaker(
         instance_count=1,
@@ -183,7 +183,7 @@ def construct_sparsemaker():
         model_name=NAME,
         config_name=NAME,
         endpoint_name=NAME,
-        role_arn="my role arn",
+        role_arn="YOUR ARN ROLE",
     )
 
 

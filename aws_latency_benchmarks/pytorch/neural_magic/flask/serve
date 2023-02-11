@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+
+from deepsparse.pipeline import Pipeline
+from deepsparse.image_classification.constants import IMAGENET_LABELS
+import base64
+import numpy as np
+import logging, json, io
+from PIL import Image
+
+from flask import Flask
+from flask import Response
+from flask import request
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.INFO)
+
+def load_pipeline():
+    return Pipeline.create(
+                task='image_classification', 
+                model_path='zoo:cv/classification/resnet_v1-18/pytorch/sparseml/imagenet/pruned85_quant-none-vnni',
+                )
+
+
+def load_image(req: request) -> np.ndarray:
+    post_body = req.get_data().decode("utf-8")
+    post_body = json.loads(post_body)
+    image = base64.b64decode(post_body['image'])
+    image = Image.open(io.BytesIO(image))
+    logging.info(f"Processing image of size {image.size}")
+    return image
+
+
+app = Flask(__name__)    
+PIPELINE = load_pipeline()
+
+@app.route("/invocations", methods=["POST"])
+def predict():
+    img = load_image(request)
+    inference = PIPELINE(images=[img])
+    
+    outs = {
+        "label": IMAGENET_LABELS[inference.labels[0]],
+        "score": inference.scores[0]
+    }
+    
+    return Response(response=json.dumps(outs), status=200)
+
+
+@app.route("/ping")
+def ping(): return Response(response="OK", status=200)
+
+
+app.run(host="0.0.0.0", port=8080)
