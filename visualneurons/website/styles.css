@@ -1,0 +1,107 @@
+.buttons-home {
+    border: solid 0px #e6b215;
+    border-radius: 8px;
+    font-size: 22px;
+    color: #ffffff;
+    width: 500px;
+    padding: 30px 30px;
+    background-color: #FF9900;
+    cursor: pointer;
+}
+
+.buttons {
+    border: solid 0px #e6b215;
+    border-radius: 8px;
+    moz-border-radius: 8px;
+    font-size: 16px;
+    color: #ffffff;
+    padding: 5px 18px;
+    background-color: #FF9900;
+    cursor: pointer;
+}
+
+.buttons:hover {
+    background-color: #ffc477;
+}
+
+/*.buttons:active {
+    position: relative;
+    top: 1px;
+}*/
+
+span {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+h1,
+canvas,
+h3 {
+    text-align: center;
+}
+
+.style-image {
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.input-container {
+    text-align: center;
+}
+
+body {
+    font-family: 'Lato';
+    text-align: center;
+}
+
+
+/* Dropdown Button */
+
+.dropbtn {
+    background-color: #FF9900;
+    color: white;
+    padding: 5px 18px;
+    font-size: 16px;
+    border: solid 0px #e6b215;
+    border-radius: 8px;
+    moz-border-radius: 8px;
+    text-align: center;
+}
+
+
+/* The container <div> - needed to position the dropdown content */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+
+/* Change color of dropdown links on hover */
+
+.dropdown-content a:hover {
+    background-color: #ffc477;
+}
+
+
+/* Show the dropdown menu on hover */
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+
+.dropdown:hover .dropbtn {
+    background-color: #FF9900;
+}
+
+select {
+    display: block;
+    margin: 0 auto;
+}

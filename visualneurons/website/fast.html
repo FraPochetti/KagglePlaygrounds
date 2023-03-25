@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<!-- Favicon -->
+<link rel="icon" href="faviconVN.ico" type="image/x-icon">
+
+<head>
+    <h2>Pick a painting. Upload a picture. </h2>
+    <h2>Stylize in the blink of an eye. </h2>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+</head>
+
+<body>
+    <input type="submit" style="margin:5px;" value="Home" class="buttons" onclick="location.href = 'index.html';">
+    <input type="submit" style="margin:5px;" value="Blog post" class="buttons" onclick=" window.open('https://francescopochetti.com/fast-neural-style-transfer-deploying-pytorch-models-to-aws-lambda/','_blank')">
+    </br>
+    </br>
+    <div class="dropdown">
+        <select id="style_choice" class="dropbtn">
+         <div class="dropdown-content">
+         <option href="#" value="Several_Circles.jpg">Select your style</option>
+         <option href="#" value="Several_Circles.jpg">Kandinsky, Several Circles</option>
+         <option href="#" value="Haring.jpg">Haring, Dance</option>
+         <option href="#" value="Wheatfield_with_crows.jpg">Van Gogh, Wheatfield with crows</option>
+         <option href="#" value="weeping.png">Picasso, The weeping woman</option>
+      </div>
+      </select>
+    </div>
+    </br>
+    </br>
+    <div class="style-image">
+        <canvas id="style_img" height="300"></canvas>
+    </div>
+    <h3>Choose an image to style</h3>
+    <div class="input-container">
+        <input type="file" value="Choose an image to style" id="inp" class="buttons" accept="image/*">
+        </br>
+        </br>
+        <canvas id="content_img" height="300"></canvas>
+        </br>
+        </br>
+        <input type="submit" value="Fast Style Transfer!" id="st" class="buttons">
+        </br>
+        </br>
+        <span id="limit"></span>
+        </br>
+        </br>
+        <div id="for_download">
+            <img id="iteration_img" height="300"></img>
+        </div>
+        </br>
+        </br>
+        <button class="buttons">
+            <a href="#" style="color:white" onclick="this.href = $('#for_download img:first').attr('src');" download>Download your piece of art!</a>
+        </button>
+    </div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script src="fast.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<!-- Favicon -->
+<link rel="icon" href="faviconVN.ico" type="image/x-icon">
+
+<head>
+    <h1>Type with a machine. The deep way.</h1>
+    <link rel="stylesheet" href="styles_hugging.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+    <h3><i>!!! Feature currently disabled !!!</i></h3>
+    <h4><i>If you are interested in deep writing you can check <a href="https://francescopochetti.com/deploying-a-pretrained-gpt-2-model-on-aws/">this blog post</a>.</i></h4>
+</head>
+
+<body>
+    <div class="center-page">
+    <input type="submit" style="margin:5px;" value="Home" class="buttons" onclick="location.href = 'index.html';">
+    <input type="submit" style="margin:5px;" value="Blog post" class="buttons" onclick=" window.open('https://francescopochetti.com/deploying-a-pretrained-gpt-2-model-on-aws/','_blank')">
+    </br>
+    </br>
+    <p>
+       Type with a <b>GPT-2 <a href="https://github.com/huggingface/transformers">Huggingface</a> <a href="https://huggingface.co/transformers/v2.1.1/pretrained_models.html">pretrained</a> Language Model</b>. 
+    </br>
+       Prompt it with a sentence and have it keep writing for you! 
+    </p>
+</div>
+</br>
+<div class="center">
+    <b>How do you want to start (max 100 chars)?</b></br>
+    <textarea rows="3" cols="50" id="hugging-prompt" maxlength="100" required>Hi, I am Francesco. I come from Rome and I am a Data Scientist</textarea></br>
+    </br>
+    <b>How many text samples do you want the model </br> to generate starting from your prompt?</b></br>
+    Between 1 and 4: <input type="number" name="quantity" id="how-many-samples" min="1" max="4" value="1"></br>
+    </br>
+    <b>How many words do you want the model to generate per sample?</b></br>
+    Between 1 and 100: <input type="number" name="quantity" id="how-many-words" min="1" max="100" value="20"></br>
+    </br>
+    <b>How much creative do you want the model to be (<a href="https://cs.stackexchange.com/questions/79241/what-is-temperature-in-lstm-and-neural-networks-generally">temperature</a>)?</b></br>
+    0: conservative model, picks the word with the highest probability. </br>
+    1: more creative model, picks random word across top probable ones. </br>
+     Between 0 and 1: <input type="number" name="quantity" id="temperature" min="0" max="1" value="1" step="0.1"></br>
+    </br>
+    <b>When predicting the next word choose from the top N words with a cumulative probability of...</b></br>
+    <a href="https://arxiv.org/abs/1904.09751">Nucleus filtering</a> with probability between 0 and 1: <input type="number" name="quantity" id="nucleus" min="0" max="1" value="0.9" step="0.1"></br>
+    </br>
+    <b>When predicting the next word choose from the top N most likely words where N is...</b></br>
+    Between 0 and 1000: <input type="number" name="quantity" id="top-n" min="0" max="1000" value="0">
+</div>
+    </br>
+<div class="center-page">
+    <button id="hugging" class="buttons">Let the machine take over!</button>
+    </br>
+    </br>
+<div id="append" style='text-align: left;'></div>
+<span id="results"></span>
+</div>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="hugging.js"></script>
+</body>
+
+</html>

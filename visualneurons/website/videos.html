@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<!-- Favicon -->
+<link rel="icon" href="faviconVN.ico" type="image/x-icon">
+
+<head>
+    <h1>Turn into an artist. Paint like a pro.</h1>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <input type="submit" style="margin:5px;" value="Home" class="buttons" onclick="location.href = 'index.html';">
+    <input type="submit" style="margin:5px;" value="Blog post" class="buttons" onclick=" window.open('https://francescopochetti.com/visualneurons-com-painting-videos-with-s3-cognito-lambda-ses-and-aws-ai/','_blank')">
+    </br>
+    </br>
+    <div class="dropdown">
+        <select id="style_choice" class="dropbtn">
+         <div class="dropdown-content">
+         <option href="#" value="VanGogh.png">Select your style</option>
+         <option href="#" value="The_Scream.jpg">Munch, The Scream</option>
+         <option href="#" value="Kand1.jpeg">Kandinsky, Composition VII</option>
+         <option href="#" value="Kand2.png">Kandinsky, Composition VIII</option>
+         <option href="#" value="Monet.jpg">Monet, Wheatstacks (End of Summer)</option>
+         <option href="#" value="Picasso.png">Picasso, Guernica</option>
+         <option href="#" value="VanGogh.png">Van Gogh, Starry Night</option>
+      </div>
+      </select>
+    </div>
+    </br>
+    </br>
+    <div class="style-image">
+        <canvas id="style_img" height="300"></canvas>
+    </div>
+    <h3>Choose a GIF to style <a href="#footnote1">[*]</a></h3>
+    <input type="file" class="buttons" accept="image/gif" id="file-chooser" />
+    </br>
+    </br>
+    Your email: <input type="text" id="email">
+    </br>
+    </br>
+    <button id="upload-button" class="buttons">Run Style Transfer</button>
+    </br>
+    </br>
+    <span id="results"></span>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script>
+    <script src="videos.js"></script>
+    <p id="footnote1">By clicking the <b>Run Style Transfer</b> button you upload your GIF to S3. </br>
+        This is when we send you a first <b>email</b> confirming we correctly ingested </br>
+        the file. You will receive a second one, with the link to the styled GIF, </br>
+        when the AWS Deep Learning magic is done.
+    </p>
+</body>
+
+</html>
